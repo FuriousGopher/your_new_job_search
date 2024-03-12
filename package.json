@@ -1,0 +1,36 @@
+{
+  "name": "your_new_job_search",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch 'src/**/*.ts' --exec 'npx ts-node' -- 'src/main.ts'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "build": "tsc -p tsconfig.json"
+  },
+  "author": "Ivan Kabar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "express-graphql": "^0.12.0",
+    "mysql2": "^3.9.2",
+    "nodemon": "^3.1.0",
+    "sequelize": "^6.37.1",
+    "sequelize-typescript": "^2.1.6",
+    "typescript": "^5.4.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.2",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "8.22.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.3.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.2"
+  }
+}
