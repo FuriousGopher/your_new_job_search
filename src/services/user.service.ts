@@ -1,7 +1,7 @@
 import { Users } from '../DB/models/Users';
 import { Op } from 'sequelize';
 
-export class UserServices {
+export class UserService {
   static async getUserByEmail(emailOrName: string) {
     const user = await Users.findOne({
       where: {

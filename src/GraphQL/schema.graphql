@@ -1,3 +1,48 @@
 type Query {
-    greeting: String
+    getJobById(id: ID): Job
+    getAllJobs: [Job]
+}
+
+type Mutation {
+    deleteJobById(id: ID!): DeleteJobResponse
+    updateJobById(id: ID!, input: UpdateJobInput!): UpdateJobResponse
+}
+
+type Job {
+    id: ID
+    url: String
+    jobTitle: String
+    companyName: String
+    companyLogo: String
+    jobIndustry: String
+    jobType: String
+    jobGeo: String
+    jobLevel: String
+    jobExcerpt: String
+    jobDescription: String
+    pubDate: String
+    createdAt: String
+    updatedAt: String
+}
+
+input UpdateJobInput {
+    url: String
+    jobTitle: String
+    companyName: String
+    companyLogo: String
+    jobIndustry: String
+    jobType: String
+    jobGeo: String
+    jobLevel: String
+    jobExcerpt: String
+    jobDescription: String
+    pubDate: String
+}
+
+type DeleteJobResponse {
+    success: Boolean!
+}
+
+type UpdateJobResponse {
+    success: Boolean!
 }
