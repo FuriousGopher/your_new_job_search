@@ -1,3 +1,4 @@
+/*
 import {
   GraphQLID,
   GraphQLList,
@@ -84,3 +85,4 @@ export const schema = new GraphQLSchema({
   query: RootQuery,
   mutation: mutations,
 });
+*/
