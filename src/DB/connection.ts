@@ -1,13 +1,14 @@
 import { Sequelize } from 'sequelize-typescript';
 import 'dotenv/config';
 import { Users } from './models/Users';
+import * as process from 'process';
 
 export const sequelize = new Sequelize({
   dialect: 'mysql',
-  host: 'database-1.c360cuk06wdr.eu-north-1.rds.amazonaws.com',
-  port: 3306,
-  database: 'root',
-  username: 'root',
-  password: 'fgdfg456fgdfs',
+  host: process.env.HOST,
+  port: Number(process.env.DB_PORT),
+  database: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   models: [Users],
 });
