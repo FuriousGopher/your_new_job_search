@@ -1,3 +1,4 @@
+/*
 import { Dogs } from '../DB/models/Dogs';
 
 export const usersList = [
@@ -47,5 +48,12 @@ export const resolvers = {
   },
   User: {
     // You can define any additional fields or resolvers for the User type here
+  },
+};
+*/
+
+export const resolvers = {
+  Query: {
+    greeting: () => 'Hello',
   },
 };

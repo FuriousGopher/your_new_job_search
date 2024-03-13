@@ -1,15 +1,21 @@
 import express from 'express';
-import { graphqlHTTP } from 'express-graphql';
-import { schema } from './Types/types';
-import { resolvers } from './GraphQL/resolvers';
 import { sequelize } from './DB/connection';
+import { readFile } from 'node:fs/promises';
+import 'dotenv/config';
+import cors from 'cors';
+import { authMiddleware, handleLogin } from './Auth/authMiddleware';
+import { loginOrEmailValidators } from './validators/validatorForLoginOrEmailInput';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { resolvers } from './GraphQL/resolvers';
 
 export const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 const startApp = async () => {
   try {
     await sequelize.authenticate();
+    app.use(cors(), express.json(), authMiddleware);
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
@@ -19,10 +25,14 @@ const startApp = async () => {
     console.log(`App listening on port ${port}`);
   });
 
-  app.use(
-    '/graphql',
-    graphqlHTTP({ schema, rootValue: resolvers, graphiql: true }),
-  );
+  app.post('/login', loginOrEmailValidators, handleLogin);
+
+  const typeDefs = await readFile('./src/GraphQL/schema.graphql', 'utf8');
+
+  const apolloServer = new ApolloServer({ typeDefs, resolvers });
+  await apolloServer.start();
+
+  app.use('/graphql', expressMiddleware(apolloServer));
 };
 
 startApp();
